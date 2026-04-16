@@ -1,3 +1,8 @@
+0.6 (2026-04-16)
+----------------
+
+* hat-trie C library re-generated with Cython 3.0.12 for Python 3.13 compatibility
+
 0.5 (2024-09-16)
 ----------------
 
