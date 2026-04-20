@@ -42,12 +42,12 @@ cdef class BaseTrie:
     def setdefault(self, bytes key, int value):
         return self._setdefault(key, value)
 
-    def keys(self):
-        return list(self.iterkeys())
+    def keys(self, bint iter_sorted=False):
+        return list(self.iterkeys(iter_sorted))
 
-    def iterkeys(self):
+    def iterkeys(self, bint iter_sorted=False):
         cdef:
-            hattrie_iter_t* it = hattrie_iter_begin(self._trie, 0)
+            hattrie_iter_t* it = hattrie_iter_begin(self._trie, iter_sorted)
             char* c_key
             size_t val
             size_t length
@@ -132,8 +132,8 @@ cdef class IntTrie(BaseTrie):
         cdef bytes bkey = key.encode('utf8')
         return self._setdefault(bkey, value)
 
-    def iterkeys(self):
-        for key in BaseTrie.iterkeys(self):
+    def iterkeys(self, bint iter_sorted=False):
+        for key in BaseTrie.iterkeys(self, iter_sorted):
             yield key.decode('utf8')
 
 
@@ -170,8 +170,8 @@ cdef class FloatTrie(BaseTrie):
         cdef bytes bkey = key.encode('utf8')
         return self._fromvalue(self._setdefault(bkey, self._tovalue(value)))
 
-    def iterkeys(self):
-        for key in BaseTrie.iterkeys(self):
+    def iterkeys(self, bint iter_sorted=False):
+        for key in BaseTrie.iterkeys(self, iter_sorted):
             yield key.decode('utf8')
 
     cdef float _fromvalue(self, value_t value):
@@ -228,8 +228,8 @@ cdef class Trie(BaseTrie):
         cdef bytes bkey = key.encode('utf8')
         return self._setdefault(bkey, self._tovalue(value))
 
-    def iterkeys(self):
-        for key in BaseTrie.iterkeys(self):
+    def iterkeys(self, bint iter_sorted=False):
+        for key in BaseTrie.iterkeys(self, iter_sorted):
             yield key.decode('utf8')
 
     cdef void _setitem(self, char* key, value_t value):

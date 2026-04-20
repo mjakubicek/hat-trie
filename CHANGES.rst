@@ -1,3 +1,8 @@
+0.7 (2026-04-20)
+----------------
+
+* allow keys() and iterkeys() to produce sorted output (defaults to false)
+
 0.6 (2026-04-16)
 ----------------
 

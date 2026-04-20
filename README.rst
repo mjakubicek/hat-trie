@@ -47,8 +47,8 @@ Currently implemented methods are:
 * __len__()
 * get()
 * setdefault()
-* keys()
-* iterkeys()
+* keys(iter_sorted=False)
+* iterkeys(iter_sorted=False)
 
 Other methods are not implemented - contributions are welcome!
 
